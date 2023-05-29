@@ -125,28 +125,58 @@ document.addEventListener("DOMContentLoaded", function () {
     draw();
   }
 
+  let directionChangeDelay = false;
+  let previousDirection = "";
+
   function handleKeydown(event) {
+    if (directionChangeDelay) {
+      return; // Ignore key press if direction change delay is active
+    }
+
+    let newDirection = "";
+
     switch (event.key) {
       case "ArrowUp":
-        if (direction !== "down") {
-          direction = "up";
-        }
+        newDirection = "up";
         break;
       case "ArrowDown":
-        if (direction !== "up") {
-          direction = "down";
-        }
+        newDirection = "down";
         break;
       case "ArrowLeft":
-        if (direction !== "right") {
-          direction = "left";
-        }
+        newDirection = "left";
         break;
       case "ArrowRight":
-        if (direction !== "left") {
-          direction = "right";
-        }
+        newDirection = "right";
         break;
+    }
+
+    if (
+      newDirection !== "" &&
+      newDirection !== oppositeDirection(previousDirection) &&
+      (snake.length === 1 || newDirection !== direction)
+    ) {
+      direction = newDirection;
+      previousDirection = direction;
+      directionChangeDelay = true;
+
+      setTimeout(() => {
+        directionChangeDelay = false; // Reset direction change delay after a certain time
+      }, 200); // Adjust the delay time as needed (in milliseconds)
+    }
+  }
+
+  function oppositeDirection(dir) {
+    switch (dir) {
+      case "up":
+        return "down";
+      case "down":
+        return "up";
+      case "left":
+        return "right";
+      case "right":
+        return "left";
+      default:
+        return "";
     }
   }
 
