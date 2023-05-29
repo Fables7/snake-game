@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   const canvas = document.getElementById("game-canvas");
   const context = canvas.getContext("2d");
-  const gridSize = 20;
-  const snake = [{ x: 40, y: 40 }];
+  const gridSize = 50;
+  const snake = [{ x: 50, y: 50 }];
   const food = { x: 200, y: 200 };
   let direction = "right";
   let score = 0;
@@ -11,6 +11,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let row = 0; row < canvas.height / gridSize; row++) {
+      for (let col = 0; col < canvas.width / gridSize; col++) {
+        const isEvenRow = row % 2 === 0;
+        const isEvenCol = col % 2 === 0;
+        const fillColor = isEvenRow
+          ? isEvenCol
+            ? "#a7d03c"
+            : "#acd645"
+          : isEvenCol
+          ? "#acd645"
+          : "#a7d03c";
+        context.fillStyle = fillColor;
+        context.fillRect(col * gridSize, row * gridSize, gridSize, gridSize);
+      }
+    }
 
     // Draw snake
     snake.forEach((segment) => {
