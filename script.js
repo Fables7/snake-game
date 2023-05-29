@@ -72,14 +72,19 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
     }
 
-    // Check for collision with the game boundaries
-    if (
-      head.x < 0 ||
-      head.y < 0 ||
-      head.x >= canvas.width ||
-      head.y >= canvas.height ||
-      isCollision(head, snake.slice(1))
-    ) {
+    // Wrap around the screen
+    if (head.x < 0) {
+      head.x = canvas.width - gridSize;
+    } else if (head.x >= canvas.width) {
+      head.x = 0;
+    } else if (head.y < 0) {
+      head.y = canvas.height - gridSize;
+    } else if (head.y >= canvas.height) {
+      head.y = 0;
+    }
+
+    // Check for collision with the snake's body
+    if (isCollision(head, snake.slice(1))) {
       gameOver();
       return;
     }
@@ -101,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     draw();
   }
-
   function isCollision(position, segments) {
     // Check if the position collides with any segment of the snake
     return segments.some(
