@@ -1,16 +1,21 @@
 #game-container {
-    width: 400px;
-    height: 400px;
-    margin: 0 auto;
-    border: 1px solid #000;
-  }
-  
-  canvas {
-    background-color: #fff;
-  }
-  
-  #buttons-container {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  border: 1px solid #000;
+}
+
+canvas {
+  background-color: #fff;
+}
+
+.snake-segment {
+  background-color: #059b34;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+#buttons-container {
+  text-align: center;
+  margin-top: 10px;
+}
