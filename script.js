@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+
     // Draw snake
     snake.forEach((segment) => {
       context.fillStyle = "#059b34";
@@ -26,9 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
       context.stroke();
     });
 
-    // Draw food
-    context.fillStyle = "#f00";
-    context.fillRect(food.x, food.y, gridSize, gridSize);
+    // Draw apple
+    const appleImage = document.getElementById("apple-image");
+    context.drawImage(appleImage, food.x, food.y, gridSize, gridSize);
 
     // Draw score
     context.fillStyle = "#000";
